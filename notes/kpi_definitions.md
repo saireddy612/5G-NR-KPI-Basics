@@ -17,3 +17,66 @@ Lower SINR limits the scheduler’s ability to select higher MCS, leading to red
 spectral efficiency and throughput.
 
 ---
+### MCS (Modulation and Coding Scheme)
+MCS defines the modulation order and coding rate selected by the gNB scheduler.
+| MCS Range | Interpretation |
+|----------|----------------|
+| 20 – 28 | High spectral efficiency (good RF conditions) |
+| 10 – 19 | Moderate efficiency |
+| < 10 | Robust transmission for poor RF |
+
+**Correlation:**  
+MCS is dynamically adjusted based on SINR and BLER targets. When RF degrades, the scheduler lowers MCS to maintain decoding reliability.
+
+---
+## BLER (Block Error Rate)
+BLER indicates the percentage of transport blocks that fail decoding.
+| BLER (%) | Link Condition |
+|---------|----------------|
+| < 5% | Healthy link |
+| 5 – 10% | Acceptable |
+| 10 – 20% | Degraded |
+| > 20% | Poor / unstable |
+
+**Correlation:**  
+High BLER triggers HARQ retransmissions, increasing latency and reducing
+effective throughput.
+
+---
+### Throughput (DL / UL)
+Throughput represents the successfully delivered data rate over the air interface. It is a combined outcome of radio conditions, scheduler behaviour, and retransmission mechanisms.
+| Throughput Level | Interpretation |
+|------------------|----------------|
+| Near peak | Good RF, high MCS, low BLER |
+| Moderate | Average RF or scheduler constraints |
+| Low | Poor RF, low MCS, high BLER |
+
+**Correlation:**  
+Throughput is a combined outcome of SINR, MCS selection, BLER behaviour, and available resource allocation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
