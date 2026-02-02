@@ -9,4 +9,4 @@ The objective is to understand how radio quality and scheduler decisions impact 
 - SINR
 - MCS Index
 - BLER
-- Downlink Thorughpu
+- Downlink Thorughput
