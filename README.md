@@ -170,115 +170,128 @@ vendor-specific configurations are included.
 
 ---
 
-## 🔍 What’s Different About This Project
-- ✅ Uses **field data from a live commercial network**
-- ✅ Captures **real interference, scheduler behavior, and mobility**
-- ❌ No lab isolation or artificial RF control
-- 🎯 Focuses on **why throughput changes**, not just what changes
+# 5G NR Downlink Throughput Behavior — Field Data Analysis
+
+This project analyzes how downlink throughput behaves in a live 5G NR network as
+radio conditions degrade from near to far cell coverage. The analysis is based
+on field data collected from a commercial network and reflects real interference,
+scheduler behavior, and mobility effects.
 
 ---
 
-## 📍 Cell Regions (Field-Based)
+## Scope of the Analysis
 
-| Region | SS-RSRP Range |
-|------|---------------|
-| Near Cell | ≥ −75 dBm |
-| Mid Cell | −95 to −98 dBm |
-| Far Cell | −108 to −110 dBm |
-
-> These regions are used consistently across all visualizations.
+- Data source: **Live commercial network (field data)**
+- Focus: **Downlink throughput correlation with RF and link-layer KPIs**
+- Objective: **Explain why throughput changes, not just observe that it changes**
+- Out of scope: Vendor-specific scheduler tuning and PRB allocation
 
 ---
 
-## 🧠 KPIs in One Line (No Theory)
+## Cell Classification
 
-- **RSRP** → coverage  
-- **SINR** → interference quality  
-- **BLER** → decoding reliability  
-- **MCS** → spectral efficiency  
-- **Throughput** → user experience  
+Cell regions are defined using SS-RSRP thresholds:
+
+| Cell Region | SS-RSRP Range |
+|------------|---------------|
+| Near Cell  | ≥ −75 dBm |
+| Mid Cell   | −95 to −98 dBm |
+| Far Cell   | −108 to −110 dBm |
+
+These ranges are applied consistently across all plots.
 
 ---
 
-## 🧩 Big Picture: What Happens as RF Degrades?
+## KPIs Considered
+
+| KPI | Role |
+|----|------|
+| SS-RSRP | Coverage indicator |
+| SS-SINR | Signal quality / interference |
+| DL BLER | Decoding reliability |
+| DL MCS | Spectral efficiency |
+| DL Throughput | User-plane performance |
+
+---
+
+## Region-wise Behavior Overview
 
 ![Near Mid Far KPI Panels](near_mid_far_vs_kpi.png)
 
-### What you should notice
-- **Near Cell:** high throughput, tight clustering
-- **Mid Cell:** throughput spread increases
-- **Far Cell:** frequent throughput collapse
+This figure presents Near, Mid, and Far cell conditions using identical KPI-to-
+throughput relationships.
 
-### Why it happens
-> The limiting factor shifts from **coverage → interference → decoding reliability**
+**Observed behavior:**
+- Near cell shows high and stable throughput enabled by good SINR and low BLER.
+- Mid cell exhibits increased throughput variability driven by SINR fluctuation.
+- Far cell shows frequent throughput collapse dominated by high BLER and low MCS.
+
+**Interpretation:**
+As RF conditions degrade, throughput limitation shifts from coverage-related
+effects to interference and decoding reliability.
 
 ---
 
-## 🎯 KPI Impact — One by One
+## KPI-to-Throughput Relationships
 
----
+### SINR vs Downlink Throughput
 
-### 🔶 SINR → The Main Throughput Driver
 ![SINR vs DL Throughput](SINR VS TPUT.png)
 
-**Pattern**
-- Higher SINR → consistently higher throughput
-- Low SINR → unstable, collapsing throughput
+**Observation:**  
+Throughput increases monotonically with SINR and becomes unstable at low SINR.
 
-**Why**
-- SINR governs whether higher MCS can be sustained
-
-**Takeaway**
-> If SINR is poor, throughput will suffer — even with good signal strength.
+**Interpretation:**  
+SINR captures interference and noise conditions and directly governs the
+scheduler’s ability to sustain higher MCS levels. In field environments, SINR
+is the strongest predictor of achievable throughput.
 
 ---
 
-### 🔷 RSRP → Coverage, Not Performance
+### RSRP vs Downlink Throughput
+
 ![RSRP vs DL Throughput](RSRP VS TPUT.png)
 
-**Pattern**
-- Similar RSRP → very different throughput outcomes
+**Observation:**  
+Similar RSRP values correspond to widely varying throughput outcomes.
 
-**Why**
-- RSRP ignores interference and scheduler contention
-
-**Takeaway**
-> RSRP tells you *where* you are, not *how fast* you’ll go.
+**Interpretation:**  
+RSRP reflects coverage but does not capture interference or load. In live
+networks, signal strength alone cannot predict throughput without SINR context.
 
 ---
 
-### 🔴 BLER → Throughput Killer
+### DL BLER vs Downlink Throughput
+
 ![DL BLER vs DL Throughput](BLER VS TPUT.png)
 
-**Pattern**
-- Rising BLER → sharp throughput drop
-- Near-zero throughput at high BLER
+**Observation:**  
+Increasing BLER results in sharp throughput degradation and frequent near-zero
+throughput events.
 
-**Why**
-- Retransmissions dominate link behavior
-
-**Takeaway**
-> BLER is where RF problems turn into real user pain.
+**Interpretation:**  
+High BLER indicates repeated decoding failures and retransmissions, reducing
+effective data delivery. BLER is a dominant throughput-limiting factor,
+especially in far cell conditions.
 
 ---
 
-### 🟢 MCS → The Translation Layer
+### DL MCS vs Downlink Throughput
+
 ![DL MCS vs DL Throughput](MCS VS TPUT.png)
 
-**Pattern**
-- Higher MCS → higher throughput
-- Far cell stuck at low MCS
+**Observation:**  
+Higher MCS aligns with higher throughput; far cell conditions are constrained to
+lower MCS selections.
 
-**Why**
-- Scheduler adapts MCS based on SINR + BLER
-
-**Takeaway**
-> MCS converts RF quality into actual data rates.
+**Interpretation:**  
+MCS represents the scheduler’s adaptation to SINR and BLER feedback. Lower MCS
+directly limits spectral efficiency and achievable throughput.
 
 ---
 
-## 🔗 The Correlation Chain (This Is the Core Insight)
+## Correlation Summary
 
-```text
-RSRP  →  SINR  →  BLER  →  MCS  →  Throughput
-coverage  quality  reliability  efficiency  experience
+Downlink throughput degradation from near to far cell follows a consistent
+dependency chain:
+
