@@ -12,7 +12,6 @@ Cell conditions are classified using SS-RSRP thresholds:
 - **Mid Cell:** SS-RSRP between −95 dBm and −98 dBm  
 - **Far Cell:** SS-RSRP between −108 dBm and −110 dBm  
 
-These ranges are used consistently across all visualisations and comparisons.
 --
 ## Throughput and KPI Behaviour Across Cell Regions
 
