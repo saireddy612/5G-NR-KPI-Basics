@@ -101,3 +101,44 @@ Downlink throughput behaviour across cell regions reflects a shift from
 coverage-enabled performance to interference- and reliability-limited
 performance. RSRP provides location context, but SINR and BLER determine whether
 higher MCS can be sustained, ultimately defining achievable throughput.
+
+## Data and Code Availability
+
+All figures in this project are generated using Python scripts included in this
+repository. Raw KPI datasets and plotting code are organised as follows.
+
+---
+
+### Dataset
+
+The `dataset/` folder contains anonymised KPI measurements grouped by cell
+region:
+
+https://github.com/saireddy612/5G-NR-KPI-Basics/blob/e6fb60eb8149a25210a0bb7943e975f3d63b5791/Dataset/far_cell.xlsx
+https://github.com/saireddy612/5G-NR-KPI-Basics/blob/e6fb60eb8149a25210a0bb7943e975f3d63b5791/Dataset/mid_cell.xlsx
+https://github.com/saireddy612/5G-NR-KPI-Basics/blob/e6fb60eb8149a25210a0bb7943e975f3d63b5791/Dataset/near_cell.xlsx
+
+Each file contains numeric KPI values only, including RSRP, SINR, DL BLER,
+DL MCS, and downlink throughput.
+
+---
+
+### Code
+
+The `code/` folder contains Python scripts used to process the dataset and
+generate all plots:
+
+- `plot_overlay.py` — KPI overlay comparisons  
+- `plot_region_panels.py` — Near / Mid / Far KPI panel generation  
+- `utils.py` — Shared plotting utilities  
+
+---
+
+### Reproducing the Results
+
+To regenerate the plots locally:
+
+```bash
+pip install pandas matplotlib openpyxl
+python code/plot_overlay.py
+python code/plot_region_panels.py
