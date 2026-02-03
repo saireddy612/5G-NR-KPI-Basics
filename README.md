@@ -1,6 +1,9 @@
 # 5G NR KPI vs Throughput Analysis (Near / Mid / Far Cell)
 
-This project analyses the relationship between critical 5G NR KPIs and downlink throughput across Near, Mid, and Far cell conditions. The objective is to understand how RF quality and link reliability influence user-plane performance in a controlled test environment.
+This project analyses the relationship between critical 5G NR KPIs and downlink
+throughput across Near, Mid, and Far cell conditions. The objective is to
+understand how RF quality and link reliability influence user-plane performance
+in a live network environment.
 
 ---
 
@@ -12,10 +15,11 @@ Cell conditions are classified using SS-RSRP thresholds:
 - **Mid Cell:** SS-RSRP between −95 dBm and −98 dBm  
 - **Far Cell:** SS-RSRP between −108 dBm and −110 dBm  
 
---
+---
+
 ## Throughput and KPI Behaviour Across Cell Regions
 
-([near_mid_far_vs_kpi.png](https://github.com/saireddy612/5G-NR-KPI-Basics/blob/b85c969fb73e567050da66cd79961a7812026865/plots/near_mid_far_vs_kpi.png))
+![Near / Mid / Far KPI Panel](https://github.com/saireddy612/5G-NR-KPI-Basics/blob/b85c969fb73e567050da66cd79961a7812026865/plots/near_mid_far_vs_kpi.png)
 
 This figure summarises how downlink throughput behaves across Near, Mid, and Far
 cell regions in a live 5G NR network. Cell regions are defined using SS-RSRP
@@ -23,19 +27,19 @@ thresholds, while throughput behaviour is explained through the combined impact
 of signal quality, interference, and link reliability KPIs.
 
 Rather than evaluating KPIs independently, this panel highlights how their
-interactions govern throughput as RF conditions degrade.
+interaction governs throughput as RF conditions degrade.
 
 ---
 
 ### Near Cell Region
 
 In the near cell region, throughput remains consistently high with relatively
-tight clustering. Strong RF conditions enable high SINR and low DL BLER, which
-allows the scheduler to sustain higher DL MCS levels.
+tight clustering. Strong RF conditions enable high SINR and low DL BLER, allowing
+the scheduler to sustain higher DL MCS levels.
 
 While minor throughput variation exists, it is not driven by RF limitations.
-Instead, throughput is largely stable because link reliability is maintained
-and aggressive MCS selection is feasible.
+Instead, throughput remains largely stable because link reliability is
+maintained and aggressive MCS selection is feasible.
 
 **Interpretation:**  
 Throughput performance in near cell conditions is enabled by high SINR and low
@@ -93,8 +97,7 @@ combined interaction of SINR, BLER, and MCS as RF conditions degrade.
 
 ### Key Takeaway
 
-Downlink throughput behavior across cell regions reflects a shift from
+Downlink throughput behaviour across cell regions reflects a shift from
 coverage-enabled performance to interference- and reliability-limited
 performance. RSRP provides location context, but SINR and BLER determine whether
 higher MCS can be sustained, ultimately defining achievable throughput.
-
