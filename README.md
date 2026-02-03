@@ -125,20 +125,9 @@ DL MCS, and downlink throughput.
 
 ### Code
 
-The `code/` folder contains Python scripts used to process the dataset and
-generate all plots:
+The `code/` folder contains Python scripts for data loading and visualization:
 
-- `plot_overlay.py` — KPI overlay comparisons  
-- `plot_region_panels.py` — Near / Mid / Far KPI panel generation  
-- `utils.py` — Shared plotting utilities  
-
----
-
-### Reproducing the Results
-
-To regenerate the plots locally:
-
-```bash
-pip install pandas matplotlib openpyxl
-python code/plot_overlay.py
-python code/plot_region_panels.py
+- `run_all.py` — Run all plots  
+- `loader.py` — Load and clean KPI data  
+- `kpis.py` — KPI definitions  
+- `plots.py` — Plotting logic
